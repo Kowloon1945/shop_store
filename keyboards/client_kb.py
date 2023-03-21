@@ -1,4 +1,5 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
+from models_merch import *
 
 shop_cart = InlineKeyboardMarkup(row_width=2)
 shop_cart_btn = InlineKeyboardButton('Корзина', callback_data='korzina')
@@ -41,20 +42,20 @@ futbolki_kb.add(size_xs).row(size_s, size_m).row(size_l, size_xl).row(size_2xl, 
 
 # Футболки
 fut_kb = InlineKeyboardMarkup(row_width=2)
-fut_uch = InlineKeyboardButton('Футболка Учение', callback_data='fut_uch')
-fut_pent = InlineKeyboardButton('Футболка Пентаграмма', callback_data='fut_pent')
-fut_stal = InlineKeyboardButton('Футболка Сталинеш', callback_data='fut_stal')
+fut_bel = InlineKeyboardButton(f'{Fut.fut + " " +  FutBel.name}', callback_data='fut_bel')
+fut_black = InlineKeyboardButton(f'{Fut.fut + " " + FutBlack.name}', callback_data='fut_black')
+fut_red = InlineKeyboardButton(f'{Fut.fut + " " + FutRed.name}', callback_data='fut_red')
 back_fut_and_hudi = InlineKeyboardButton('Назад', callback_data='back_fut_and_hudi') #общая для футболок и худи кнопка назад
-fut_kb.add(fut_uch).add(fut_pent).add(fut_stal).add(back_fut_and_hudi)
+fut_kb.add(fut_bel).add(fut_black).add(fut_red).add(back_fut_and_hudi)
 
 
 
 
 # Худи
 hudi_kb = InlineKeyboardMarkup(row_width=2)
-hudi_uch = InlineKeyboardButton('Худи Учение', callback_data='hudi_uch')
-hudi_pent = InlineKeyboardButton('Худи Пентаграмма', callback_data='hudi_pent')
-hudi_kb.add(hudi_uch).add(hudi_pent).add(back_fut_and_hudi)
+hudi_blue = InlineKeyboardButton(f'{Hud.hud + " " + HudBlue.name}', callback_data='hudi_blue')
+hudi_orange = InlineKeyboardButton(f'{Hud.hud + " " + HudOrange.name}', callback_data='hudi_orange')
+hudi_kb.add(hudi_blue).add(hudi_orange).add(back_fut_and_hudi)
 
 # клавиатура для худи
 the_hudi_kb = InlineKeyboardMarkup(row_width=2)

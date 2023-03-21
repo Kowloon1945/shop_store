@@ -23,13 +23,13 @@ class FutBel(Options, Fut):
             raise Exception('Неправильно указан размер')
 
 
-x = FutUch('XL')
+x = FutBel('XL')
 print(x.name, x.size)
 
-class FutPent(Options, Fut):
+class FutRed(Options, Fut):
     price: int = Fut.price
     size: str = ''
-    name = 'Пентаграмма'
+    name = 'Красная'
 
     def __init__(self, text_size):
         if text_size in Options.size_list:
@@ -37,13 +37,13 @@ class FutPent(Options, Fut):
             self.name = Fut.fut + ' ' + self.name
         else:
             raise Exception('Неправильно указан размер')
-y = FutPent('S')
+y = FutRed('S')
 print(y.name, y.size)
 
-class FutStal(Options, Fut):
+class FutBlack(Options, Fut):
     price: int = Fut.price
     size: str = ''
-    name = 'Сталинеш'
+    name = 'Черная'
 
     def __init__(self, text_size):
         if text_size in Options.size_list:
@@ -51,16 +51,16 @@ class FutStal(Options, Fut):
             self.name = Fut.fut + ' ' + self.name
         else:
             raise Exception('Неправильно указан размер')
-z = FutStal('S')
-z1 = FutStal('XS')
+z = FutBlack('S')
+z1 = FutBlack('XS')
 print(z.name, z.size)
 print(z1.name, z1.size)
 
 
-class HudUch(Options, Hud):
+class HudBlue(Options, Hud):
     price: int = Hud.price
     size: str = ''
-    name = 'Учение'
+    name = 'Голубая'
 
     def __init__(self, text_size):
         if text_size in Options.size_list:
@@ -70,10 +70,10 @@ class HudUch(Options, Hud):
             raise Exception('Неправильно указан размер')
 
 
-class HudPent(Options, Hud):
+class HudOrange(Options, Hud):
     price: int = Hud.price
     size: str = ''
-    name = 'Пентаграмма'
+    name = 'Оранжевая'
 
     def __init__(self, text_size):
         if text_size in Options.size_list:

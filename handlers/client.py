@@ -8,11 +8,10 @@ from datetime import datetime
 import sqlite3
 
 connect = sqlite3.connect('korzina_shop_store.db')
-# chat_id = '-100'
+chat_id = '-100930570878'
 
 async def command_start(message: types.Message):
-    await bot.send_photo(message.from_user.id, types.InputFile(r'src\photo_menu.jpg'),
-                         caption='Привет! Это бот для заказа футболок и худи. Перед заказом прочти, пожалуйста, дисклеймер',
+    await bot.send_message(message.from_user.id, 'Привет! Это бот для заказа футболок и худи',
                          reply_markup=open_catalog_kb)
 
 async def command_korzina(message: types.Message):
@@ -47,48 +46,48 @@ async def choice_type_merch(callback_query: types.CallbackQuery, state: FSMConte
 
 @dp.callback_query_handler(state=Merch.the_merch)
 async def choice_the_merch(callback_query: types.CallbackQuery, state: FSMContext):
-    if callback_query.data == 'fut_uch':
+    if callback_query.data == 'fut_bel':
         await callback_query.message.delete()
-        await state.update_data(the_merch=FutUch.name)
+        await state.update_data(the_merch=FutBel.name)
         await state.update_data(price_merch=Fut.price)
-        await bot.send_photo(callback_query.from_user.id, types.InputFile(r'src\fut_uch.jpg'),
-                             caption='Футболка Один\n\nДоставка: 600 рублей (почта РФ). От 800 рублей в другие страны',
+        await bot.send_photo(callback_query.from_user.id, types.InputFile(r'src\bel_fut.jpg'),
+                             caption='Футболка Белая\n\nОПИСАНИЕ\n\nДоставка: 600 рублей (почта РФ). От 800 рублей в другие страны',
                              reply_markup=futbolki_kb)
         await Merch.size_merch.set()
 
-    elif callback_query.data == 'fut_pent':
+    elif callback_query.data == 'fut_black':
         await callback_query.message.delete()
-        await state.update_data(the_merch=FutPent.name)
+        await state.update_data(the_merch=FutBlack.name)
         await state.update_data(price_merch=Fut.price)
-        await bot.send_photo(callback_query.from_user.id, types.InputFile(r'src\fut_pent.jpg'),
-                             caption='Футболка Два\n\nДоставка: 600 рублей (почта РФ). От 800 рублей в другие страны',
+        await bot.send_photo(callback_query.from_user.id, types.InputFile(r'src\chern_fut.jpg'),
+                             caption='Футболка Черная\n\nОПИСАНИЕ\n\nДоставка: 600 рублей (почта РФ). От 800 рублей в другие страны',
                              reply_markup=futbolki_kb)
         await Merch.size_merch.set()
 
-    elif callback_query.data == 'fut_stal':
+    elif callback_query.data == 'fut_red':
         await callback_query.message.delete()
-        await state.update_data(the_merch=FutStal.name)
+        await state.update_data(the_merch=FutRed.name)
         await state.update_data(price_merch=Fut.price)
-        await bot.send_photo(callback_query.from_user.id, types.InputFile(r'src\fut_stal.jpg'),
-                             caption='Футболка Три\n\nДоставка: 600 рублей (почта РФ). От 800 рублей в другие страны',
+        await bot.send_photo(callback_query.from_user.id, types.InputFile(r'src\kras_fut.jpg'),
+                             caption='Футболка Красная\n\nОПИСАНИЕ\n\nДоставка: 600 рублей (почта РФ). От 800 рублей в другие страны',
                              reply_markup=futbolki_kb)
         await Merch.size_merch.set()
 
-    elif callback_query.data == 'hudi_uch':
+    elif callback_query.data == 'hudi_blue':
         await callback_query.message.delete()
-        await state.update_data(the_merch=HudUch.name)
+        await state.update_data(the_merch=HudBlue.name)
         await state.update_data(price_merch=Hud.price)
-        await bot.send_photo(callback_query.from_user.id, types.InputFile(r'src\tol_uch.jpg'),
-                             caption='Худи Один\n\nДоставка: 600 рублей (почта РФ). От 800 рублей в другие страны',
+        await bot.send_photo(callback_query.from_user.id, types.InputFile(r'src\gol_hudi.jpg'),
+                             caption='Худи Голубая\n\nОПИСАНИЕ\n\nДоставка: 600 рублей (почта РФ). От 800 рублей в другие страны',
                              reply_markup=the_hudi_kb)
         await Merch.size_merch.set()
 
-    elif callback_query.data == 'hudi_pent':
+    elif callback_query.data == 'hudi_orange':
         await callback_query.message.delete()
-        await state.update_data(the_merch=HudPent.name)
+        await state.update_data(the_merch=HudOrange.name)
         await state.update_data(price_merch=Hud.price)
-        await bot.send_photo(callback_query.from_user.id, types.InputFile(r'src\tol_pent.jpg'),
-                             caption='Худи Два\n\nДоставка: 600 рублей (почта РФ). От 800 рублей в другие страны',
+        await bot.send_photo(callback_query.from_user.id, types.InputFile(r'src\orang_hudi.jpg'),
+                             caption='Худи Оранжевая\n\nОПИСАНИЕ\n\nДоставка: 600 рублей (почта РФ). От 800 рублей в другие страны',
                              reply_markup=the_hudi_kb)
         await Merch.size_merch.set()
 
@@ -231,7 +230,7 @@ async def samik_msk(message: types.Message, state: FSMContext):
          del_country, del_address, pay_type,
          date, message.from_user.id,
          data['user_tgUsername'], delivery_state))
-    order = cursor.execute('SELECT * FROM orders WHERE tg_id=(?)', [message.from_user.id]).fetchall()
+    order= cursor.execute('SELECT * FROM orders WHERE user_id=(?)', [message.from_user.id]).fetchall()
     await bot.send_message(message.from_user.id, 'Отлично! Ждите, мы с вами свяжемся')
     await bot.send_message(chat_id, f'{order}')
     cursor.close()
